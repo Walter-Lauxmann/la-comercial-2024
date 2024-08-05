@@ -97,14 +97,38 @@ class ModeloABM extends Modelo {
         if($this->limit > 0) {
             $sql .= " LIMIT $this->limit";
         }
-        echo $sql."<br />"; // Mostramos la instrucción SQL
+        // echo $sql."<br />"; // Mostramos la instrucción SQL
         //Ejecutamos la consulta y la guardamos en $resultado
         $resultado = $this->db->query($sql); 
         // Guardamos los datos en un array asociativo
-        $datos = $resultado->fetch_all(MYSQLI_ASSOC);
+        $datos = json_encode($resultado->fetch_all(MYSQLI_ASSOC));
         // Convertimos los datos al formato JSON
-        $datos_json = json_encode($datos);
+        //$datos_json = json_encode($datos);
         // Retornamos los datos en formato JSON
-        return $datos_json;
+        return $datos;
+    }
+
+    /**
+     * Inserta datos en una tabla
+     * @param valores Los valores a insertar
+     */
+    public function insertar($valores) {
+        // INSERT INTO productos(codigo, nombre, descripcion, precio) VALUES ('201', 'Samsung A54', 'Procesador...', '135000')
+        $campos = '';
+        $datos = '';
+        // Para cada $valores como $key => $value
+        foreach( $valores as $key => $value ) {
+            $campos .= $key.","; // Agregamos cada $key a $campos
+            $datos .= "'".$value."',"; // Agregamos cada $value a $datos
+        }
+        // Quitamos el último caracter (,) a los campos y los datos
+        $campos = substr($campos,0,strlen($campos)-1);
+        $datos = substr($datos,0,strlen($datos)-1);
+
+        // Guardamos en $sql la instrucción INSERT
+        $sql = "INSERT INTO $this->tabla ($campos) VALUES ($datos)";
+        echo $sql; // Mostramos la instrucción SQL resultante
+        // Ejecutamos la instrucción SQL
+        $this->db->query($sql);
     }
 }
