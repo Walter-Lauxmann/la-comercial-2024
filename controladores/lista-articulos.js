@@ -1,6 +1,31 @@
-import { seleccionarArticulos } from "../modelos/articulos.js";
+import { seleccionarArticulos, insertarArticulos } from "../modelos/articulos.js";
+/* Objetos del DOM */
 
+// Listado de articulos
 const listado = document.querySelector("#listado");
+
+// Alerta
+const alerta = document.querySelector('#alerta');
+
+// Formulario
+const formulario = document.querySelector('#formulario');
+const formularioModal = new bootstrap.Modal(document.querySelector('#formularioModal'));
+const btnNuevo = document.querySelector('#btnNuevo');
+
+// Inputs
+const inputCodigo = document.querySelector('#codigo');
+const inputNombre = document.querySelector('#nombre');
+const inputDescripcion = document.querySelector('#descripcion');
+const inputPrecio = document.querySelector('#precio');
+
+// Imagen del formulario
+const frmImagen = document.querySelector('#frmImagen');
+
+// Variables
+let opcion = '';
+let id;
+let mensajeAlerta;
+
 
 /**
  * Esta función se ejecuta cuando
