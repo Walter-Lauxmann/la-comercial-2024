@@ -69,3 +69,54 @@ async function mostrarArticulos() {
     `)
   );
 }
+
+/**
+ * Ejecuta el evento clic del botón Nuevo
+ */
+btnNuevo.addEventListener('click', ()=> {
+    // Limpiamos los inputs
+    inputCodigo.value = null;
+    inputNombre.value = null;
+    inputDescripcion.value = null;
+    inputPrecio.value = null;
+    frmImagen.src = './imagenes/productos/nodisponible.png';
+
+    // Mostrar el formulario modal
+    formularioModal.show();
+
+    opcion = 'insertar';
+})
+
+/**
+ * Ejecuta el evento submit del formulario
+ */
+formulario.addEventListener('submit', (e) => {
+    e.preventDefault(); // Prevenimos la acción por defecto
+
+    const datos = new FormData(formulario); // Guardamos los datos del formulario
+
+    switch(opcion) {
+        case 'insertar':
+            mensajeAlerta = 'Datos guardados';
+            insertarArticulos(datos);
+            break;
+    }
+    insertarAlerta(mensajeAlerta, 'success');
+    mostrarArticulos();
+})
+
+/**
+ * Define los mensajes de alerta
+ * @param mensaje el mensaje a mostrar
+ * @param tipo el tipo de alerta
+ */
+const insertarAlerta = (mensaje, tipo) => {
+    const envoltorio = document.createElement('div');
+    envoltorio.innerHTML = `
+        <div class="alert alert-${tipo} alert-dismissible" role="alert">
+            <div>${mensaje}</div>
+            <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Cerrar"></button>
+        </div>
+    `;
+    alerta.append(envoltorio);
+}
