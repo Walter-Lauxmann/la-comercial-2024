@@ -134,11 +134,11 @@ class ModeloABM extends Modelo {
 
     /**
      * Actualiza los datos de una tabla
-     * @param valores: los valores a modificar
+     * @param valores los valores a modificar
      */
     public function actualizar($valores) {
         // UPDATE productos SET precio = '350000' WHERE id=8
-        $sql = "UPDATE $this->tabla SET"; 
+        $sql = "UPDATE $this->tabla SET "; 
         // Para cada $valores como $key => $value
         foreach($valores as $key => $value) {
             // Agregamos a $sql los campos ($key) y los valores ($value)

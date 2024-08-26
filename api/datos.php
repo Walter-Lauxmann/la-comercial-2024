@@ -6,8 +6,13 @@ $mensaje = '';
 
 if(isset($_GET['tabla'])) {
     $tabla = new ModeloABM($_GET['tabla']);
+
+    if(isset($_GET['id'])) {
+        $tabla->set_criterio("id=".$_GET['id']);
+    }
+
     if(isset($_GET['accion'])) {
-        if($_GET['accion'] == 'insertar') {
+        if($_GET['accion'] == 'insertar' || $_GET['accion'] == 'actualizar') {
             $valores = $_POST;
         }
 
@@ -20,6 +25,18 @@ if(isset($_GET['tabla'])) {
             case 'insertar':
                 $tabla->insertar($valores);
                 $mensaje = 'Datos Guardados';
+                echo json_encode($mensaje);
+                break;
+
+            case 'actualizar':
+                $tabla->actualizar($valores);
+                $mensaje = 'Datos actualizados';
+                echo json_encode($mensaje);
+                break;
+
+            case 'eliminar':
+                $tabla->eliminar();
+                $mensaje = 'Datos eliminados';
                 echo json_encode($mensaje);
                 break;
         }

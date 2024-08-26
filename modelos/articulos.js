@@ -28,3 +28,33 @@ export function insertarArticulos(datos) {
         return data;
     })
 }
+
+/**
+ * Actualiza los datos en la Base de Datos
+ * @param datos los datos a actualizar
+ * @param id el id del artículo
+ */
+export const actualizarArticulos = (datos, id) => { // Función flecha = function actualizarArticulos(datos, id) {}
+    fetch(`${url}&accion=actualizar&id=${id}`, {
+        method: 'POST',
+        body: datos
+    })
+    .then(res=>res.json())
+    .then(data=> {
+        console.log(data);
+        return data;
+    });
+}
+
+/**
+ * Elimina los datos de la Base de Datos
+ * @param id el id del articulo a eliminar
+ */
+export const eliminarArticulos = (id) => {
+    fetch(`${url}&accion=eliminar&id=${id}`,{})
+        .then(res => res.json())
+        .then(data => {
+            console.log(data);
+            return data;
+        })
+}
