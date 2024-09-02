@@ -138,7 +138,7 @@
       aria-hidden="true"
     >
       <div class="modal-dialog modal-lg">
-        <form id="formulario">
+        <form id="formulario" enctype="multipart/form-data">
           <div class="modal-content">
             <div class="modal-header">
               <h1 class="modal-title fs-5" id="exampleModalLabel">Articulo</h1>
@@ -158,6 +158,10 @@
                       alt="Imagen no disponible"
                       id="frmImagen"
                     />
+                    <div class="mb-3">
+                      <label for="imagen" class="form-label">Seleccionar imagen</label>
+                      <input type="file" name="imagen" id="imagen" class="form-control" />
+                    </div>
                   </div>
                   <div class="col-md-7">
                     <div class="row">

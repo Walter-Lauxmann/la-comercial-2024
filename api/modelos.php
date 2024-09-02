@@ -127,7 +127,7 @@ class ModeloABM extends Modelo {
 
         // Guardamos en $sql la instrucción INSERT
         $sql = "INSERT INTO $this->tabla ($campos) VALUES ($datos)";
-        echo $sql; // Mostramos la instrucción SQL resultante
+        // echo $sql; // Mostramos la instrucción SQL resultante
         // Ejecutamos la instrucción SQL
         $this->db->query($sql);
     }
@@ -147,7 +147,7 @@ class ModeloABM extends Modelo {
         $sql = substr($sql,0,strlen($sql)-1); // Quitamos la coma final
         // Agregamos el criterio 
         $sql .= " WHERE $this->criterio";
-        echo $sql.'<br>'; // Mostramos la instrucción SQL resultante
+        // echo $sql.'<br>'; // Mostramos la instrucción SQL resultante
         $this->db->query($sql); // Ejecutamos la instrucción
     }
 
