@@ -66,21 +66,37 @@
               <a class="nav-link disabled">Disabled</a>
             </li>
           </ul>
-          <form class="d-flex" role="search">
-            <input
-              class="form-control me-2"
-              type="text"
-              placeholder="Usuario"
-              aria-label="Usuario"
-            />
-            <input
-              class="form-control me-2"
-              type="password"
-              placeholder="Contraseña"
-              aria-label="Contraseña"
-            />
-            <button class="btn btn-outline-success" type="submit">Login</button>
-          </form>
+          <div id="nav-login">
+            <div id="div-login">
+              <form class="d-flex" id="form-login">
+                <input
+                  class="form-control me-2"
+                  type="text"
+                  name="usuario"
+                  id="usuario"
+                  placeholder="Usuario"
+                  aria-label="Usuario"
+                />
+                <input
+                  class="form-control me-2"
+                  type="password"
+                  name="password"
+                  id="password"
+                  placeholder="Contraseña"
+                  aria-label="Contraseña"
+                />
+                <button class="btn btn-outline-success" type="submit">
+                  Login
+                </button>
+              </form>
+            </div>
+            <div id="div-logout" style="display: none;">
+              <span id="texto-logueado" class="text-white"></span>
+              <button id="btn-logout" class="btn btn-outline-primary">
+                Cerrar sesión
+              </button>
+            </div>
+          </div>
         </div>
       </div>
     </nav>
@@ -159,8 +175,15 @@
                       id="frmImagen"
                     />
                     <div class="mb-3">
-                      <label for="imagen" class="form-label">Seleccionar imagen</label>
-                      <input type="file" name="imagen" id="imagen" class="form-control" />
+                      <label for="imagen" class="form-label"
+                        >Seleccionar imagen</label
+                      >
+                      <input
+                        type="file"
+                        name="imagen"
+                        id="imagen"
+                        class="form-control"
+                      />
                     </div>
                   </div>
                   <div class="col-md-7">
@@ -220,7 +243,11 @@
               >
                 Cerrar
               </button>
-              <button type="submit" class="btn btn-primary" data-bs-dismiss="modal">
+              <button
+                type="submit"
+                class="btn btn-primary"
+                data-bs-dismiss="modal"
+              >
                 Guardar Cambios
               </button>
             </div>
@@ -236,5 +263,6 @@
     ></script>
     <script type="module" src="./controladores/lista-articulos.js"></script>
     <script src="./controladores/notapedido.js"></script>
+    <script src="./controladores/login.js"></script>
   </body>
 </html>
