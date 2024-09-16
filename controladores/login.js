@@ -30,7 +30,7 @@ frmLogin.addEventListener('submit', (e) => {
 /**
  * Busca el usuario y se loguea
  */
-const login = (datos) => {
+const login = (datos) => { 
     fetch(url, {
         method: 'POST',
         body: datos

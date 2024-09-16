@@ -26,6 +26,10 @@ let opcion = '';
 let id;
 let mensajeAlerta;
 
+// Control de usuario
+let usuario = '';
+let logueado = false;
+
 
 /**
  * Esta función se ejecuta cuando
@@ -33,8 +37,26 @@ let mensajeAlerta;
  */
 
 document.addEventListener('DOMContentLoaded', () => {
+    controlUsuario();
     mostrarArticulos();
-})
+});
+
+/**
+ * Controla si el usuario está logueado
+ */
+const controlUsuario = () => {
+    if(sessionStorage.getItem('usuario')) {
+        usuario = sessionStorage.getItem('usuario');
+        logueado = true;
+    } else {
+        logueado = false;
+    }
+    if(logueado) {
+        btnNuevo.style.display = 'inline';
+    } else {
+        btnNuevo.style.display = 'none';
+    }
+};
 
 
 /**
@@ -44,7 +66,7 @@ document.addEventListener('DOMContentLoaded', () => {
 async function mostrarArticulos() {
   const articulos = await seleccionarArticulos();
   listado.innerHTML = '';
-  articulos.map(articulo =>
+    articulos.map(articulo =>
       (listado.innerHTML += `
                 <div class="col">
                     <div class="card" style="width: 18rem;">
@@ -65,7 +87,7 @@ async function mostrarArticulos() {
                             <h5>$ <span name="spanprecio">${articulo.precio}.-</span></h5>
                             <input class="form-control" type="number" value="0" min="0" max="11" name="inputcantidad" onchange="calcularPedido()">
                         </div>
-                        <div class="card-footer">
+                        <div class="card-footer" style="display:${logueado?'block':'none'};">
                             <a class="btn-editar btn btn-primary">Editar</a>
                             <a class="btn-borrar btn btn-danger">Borrar</a> 
                             <input type="hidden" class="id-articulo" value="${articulo.id}">
