@@ -26,6 +26,9 @@ let opcion = '';
 let id;
 let mensajeAlerta;
 
+let articulos = [];
+let articulo = {};
+
 // Control de usuario
 let usuario = '';
 let logueado = false;
@@ -64,7 +67,11 @@ const controlUsuario = () => {
  *
  */
 async function mostrarArticulos() {
-  const articulos = await seleccionarArticulos();
+  articulos = await seleccionarArticulos();
+  
+  const articulosFiltrados = articulos.filter(items => items.nombre.includes('Samsung'));
+  console.log(articulosFiltrados);
+
   listado.innerHTML = '';
     articulos.map(articulo =>
       (listado.innerHTML += `
@@ -177,18 +184,23 @@ on(document, 'click', '.btn-editar', e => {
 
     // Guardar los valores del card del artículo
     id = cardFooter.querySelector('.id-articulo').value;
+    articulo = articulos.find(item => item.id == id);
+    console.log(articulo);
+
+    /*
     const codigo = cardFooter.parentNode.querySelector('span[name=spancodigo]').innerHTML;
     const nombre = cardFooter.parentNode.querySelector('span[name=spannombre]').innerHTML;
     const descripcion = cardFooter.parentNode.querySelector('.div-descripcion').innerHTML;
     const precio = cardFooter.parentNode.querySelector('span[name=spanprecio]').innerHTML;
     const imagen = cardFooter.querySelector('.imagen-articulo').value;
+    */
 
     // Asignamos los valores a los input del formulario
-    inputCodigo.value = codigo;
-    inputNombre.value = nombre;
-    inputDescripcion.value = descripcion;
-    inputPrecio.value = precio;
-    frmImagen.src = `./imagenes/productos/${imagen}`;
+    inputCodigo.value = articulo.codigo;
+    inputNombre.value = articulo.nombre;
+    inputDescripcion.value = articulo.descripcion;
+    inputPrecio.value = articulo.precio;
+    frmImagen.src = `./imagenes/productos/${articulo.imagen}`;
 
     // Mostramos el formulario
     formularioModal.show();
@@ -202,11 +214,16 @@ on(document, 'click', '.btn-editar', e => {
 on(document, 'click', '.btn-borrar', e => {
     const cardFooter = e.target.parentNode;
     id = cardFooter.querySelector('.id-articulo').value;
+    articulo = articulos.find(item => item.id == id);
+
+    /*
     const nombre = cardFooter.parentNode.querySelector('span[name=spannombre]').innerHTML;
-    let aceptar = confirm(`¿Relamente desea eliminar a ${nombre}?`);
+    */
+
+    let aceptar = confirm(`¿Relamente desea eliminar a ${articulo.nombre}?`);
     if(aceptar) {
         eliminarArticulos(id);
-        insertarAlerta(`${nombre} borrado`, 'danger');
+        insertarAlerta(`${articulo.nombre} borrado`, 'danger');
         mostrarArticulos();
     }
 })
